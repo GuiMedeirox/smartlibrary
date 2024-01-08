@@ -1,16 +1,48 @@
 package com.smartlib.smartlib.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.smartlib.smartlib.model.Livro;
+import com.smartlib.smartlib.service.LivroService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Objects;
 
 @RestController
-@RequestMapping("/livros")
+@RequestMapping("/v1")
 public class LivroController {
 
-    @GetMapping
-    public String teste(){
-        return "Funcionando";
+    @Autowired
+    private LivroService livroService;
+    @PostMapping("/livros")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Livro criarLivro(@RequestBody Livro livro){
+        return livroService.criarLivro(livro);
     }
 
+    @GetMapping("/livros")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Livro> listarLivros(){
+        return livroService.listarLivros();
+    };
+
+    @GetMapping("/livros/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Livro> listarLivroPorId(@PathVariable(value = "id") Long id ){
+        return livroService.buscarLivroPorId(id);
+    };
+
+    @PutMapping("/livros/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Livro> editarLivro(@PathVariable(value="id") Long id, @RequestBody Livro livro){
+        return livroService.editarLivro(id, livro);
+    }
+
+    @DeleteMapping("/livros/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<Object> editarLivro(@PathVariable(value="id") Long id){
+        return livroService.excluirLivro(id);
+    }
 }
