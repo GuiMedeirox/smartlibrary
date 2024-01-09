@@ -45,4 +45,18 @@ public class LivroController {
     public ResponseEntity<Object> editarLivro(@PathVariable(value="id") Long id){
         return livroService.excluirLivro(id);
     }
+
+    @GetMapping("/livros/nome/{nome}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Livro> buscarLivroPeloNome (@PathVariable(value = "nome") String nome){
+        return livroService.buscarLivroPeloNome(nome);
+    }
+
+    @GetMapping("/livros/sessao")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Livro> buscarLivroPelaSessao(@RequestParam String nome_sessao){
+        return livroService.buscarLivroPorSessao(nome_sessao);
+    }
+
+
 }

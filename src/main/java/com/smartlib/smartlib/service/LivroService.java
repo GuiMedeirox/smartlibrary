@@ -41,9 +41,16 @@ public class LivroService {
            livroRepository.deleteById(id);
            return ResponseEntity.noContent().build();
         }).orElse(ResponseEntity.notFound().build());
+    }
 
+    public ResponseEntity<Livro> buscarLivroPeloNome(String nome){
+        return livroRepository.findByName(nome)
+                .map(livro -> ResponseEntity.ok().body(livro))
+                .orElse(ResponseEntity.notFound().build());
+    }
 
-
+    public List<Livro> buscarLivroPorSessao(String sessao){
+        return livroRepository.findBySection(sessao);
     }
 
 }

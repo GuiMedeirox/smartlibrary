@@ -1,6 +1,10 @@
 package com.smartlib.smartlib.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "livro")
@@ -16,6 +20,30 @@ public class Livro {
     private String sessao;
     @Column(nullable = false)
     private String genero;
+
+    @CreationTimestamp
+    @Column(name="registradoEm", nullable = false, updatable = false)
+    private LocalDateTime registradoEm;
+
+    @UpdateTimestamp
+    @Column(name="editadoEm", nullable = false)
+    private LocalDateTime editadoEm;
+
+    public LocalDateTime getRegistradoEm() {
+        return registradoEm;
+    }
+
+    public void setRegistradoEm(LocalDateTime registradoEm) {
+        this.registradoEm = registradoEm;
+    }
+
+    public LocalDateTime getEditadoEm() {
+        return editadoEm;
+    }
+
+    public void setEditadoEm(LocalDateTime editadoEm) {
+        this.editadoEm = editadoEm;
+    }
 
     public Long getId() {
         return id;
