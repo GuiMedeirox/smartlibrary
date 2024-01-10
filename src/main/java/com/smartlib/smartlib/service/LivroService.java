@@ -53,4 +53,20 @@ public class LivroService {
         return livroRepository.findBySection(sessao);
     }
 
+    public List<Livro> buscarLivroQueComecaCom(String parte){
+        return livroRepository.findByNomeStartingWith(parte);
+    }
+    public List<Livro> buscarLivroQueComecaComESessao(String parte, String sessao){
+        return livroRepository.findByNomeStartingWithAndSessao(parte, sessao);
+    }
+
+    public List<Livro> buscarLivroOrdenadoPorSessao(String sessao){
+        return livroRepository.findByNomeStartingWithOrderBySessao(sessao);
+    }
+
+    public List<Livro> buscarListaDeId(Long id){
+        return livroRepository.findByIdLessThanEqual(id);
+    }
+
+
 }

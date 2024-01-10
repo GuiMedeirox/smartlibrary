@@ -58,5 +58,29 @@ public class LivroController {
         return livroService.buscarLivroPorSessao(nome_sessao);
     }
 
+    @GetMapping("/livros/nome")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Livro> buscarLivroQueComecaCom(@RequestParam String comeco_livro){
+        return livroService.buscarLivroQueComecaCom(comeco_livro);
+    }
+
+    @GetMapping("/livros/nome-sessao")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Livro> buscarLivroQueComecaComESessao(@RequestParam String comeco_livro, String sessao){
+        return livroService.buscarLivroQueComecaComESessao(comeco_livro, sessao);
+    }
+
+    @GetMapping("/livros/sessao-nome")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Livro> buscarLivroOrdenadoPorSessao(@RequestParam String sessao){
+        return livroService.buscarLivroOrdenadoPorSessao(sessao);
+    }
+
+    @GetMapping("/livros/id")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Livro> buscarListaDeId(@RequestParam Long id){
+        return livroService.buscarListaDeId(id);
+    }
+
 
 }
