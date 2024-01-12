@@ -1,5 +1,6 @@
 package com.smartlib.smartlib.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,6 +15,11 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "autor_id", referencedColumnName = "id")
+    @JsonManagedReference
+    private Autor autor;
+
     @Column(nullable = false, unique = true)
     private String nome;
     @Column(nullable = false)
@@ -22,11 +28,11 @@ public class Livro {
     private String genero;
 
     @CreationTimestamp
-    @Column(name="registradoEm", nullable = false, updatable = false)
+    @Column(name = "registradoEm", nullable = false, updatable = false)
     private LocalDateTime registradoEm;
 
     @UpdateTimestamp
-    @Column(name="editadoEm", nullable = false)
+    @Column(name = "editadoEm", nullable = false)
     private LocalDateTime editadoEm;
 
     public LocalDateTime getRegistradoEm() {
@@ -76,7 +82,6 @@ public class Livro {
     public void setGenero(String genero) {
         this.genero = genero;
     }
-
 
 
 }
