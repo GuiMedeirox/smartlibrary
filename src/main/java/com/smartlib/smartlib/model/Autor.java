@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
 @Table(name = "autor")
 public class Autor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO) // IDENTITY
     private Long id;
+
     @OneToOne(mappedBy = "autor")
     @JsonBackReference
     private Livro livro;
