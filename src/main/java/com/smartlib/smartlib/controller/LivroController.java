@@ -20,6 +20,10 @@ public class LivroController {
     @ResponseStatus(HttpStatus.CREATED)
     public Livro criarLivro(@RequestBody Livro livro){
         return livroService.criarLivro(livro);
+
+
+
+
     }
 
     @GetMapping("/livros")

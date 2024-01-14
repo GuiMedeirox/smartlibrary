@@ -6,6 +6,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "autor")
@@ -14,9 +17,6 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.AUTO) // IDENTITY
     private Long id;
 
-    @OneToOne(mappedBy = "autor")
-    @JsonBackReference
-    private Livro livro;
 
     @CreationTimestamp
     @Column(name = "registradoEm", nullable = false, updatable = false)

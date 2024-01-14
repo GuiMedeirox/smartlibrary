@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "livro")
 
@@ -14,9 +15,15 @@ public class Livro {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "autor_id", referencedColumnName = "id")
-    @JsonManagedReference
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name="autor_id", nullable = false)
     private Autor autor;
 
     @Column(nullable = false, unique = true)
